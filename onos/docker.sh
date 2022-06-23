@@ -55,8 +55,20 @@ echo "onos docker setup done"
 
 # 加载fwd、proxyarp和openflow模块
 docker exec -i onos22 ./bin/onos-app localhost activate org.onosproject.fwd > /dev/null
-echo "org.onosproject.fwd activated"
 docker exec -i onos22 ./bin/onos-app localhost activate org.onosproject.proxyarp > /dev/null
-echo "org.onosproject.proxyarp activated"
 docker exec -i onos22 ./bin/onos-app localhost activate org.onosproject.openflow > /dev/null
-echo "org.onosproject.openflow activated"
+
+rm /root/.ssh/known_hosts
+active_apps=$(sshpass -p "rocks" ssh -o StrictHostKeyChecking=no -p 8101 onos@localhost "apps -s -a")
+fwd_state=$(echo $active_apps|xargs -n 1|grep org.onosproject.fwd)
+proxyarp_state=$(echo $active_apps|xargs -n 1|grep org.onosproject.proxyarp)
+openflow_state=$(echo $active_apps|xargs -n 1|grep 'openflow$')
+if [ $fwd_state ]; then  
+  echo "org.onosproject.fwd activated"
+fi
+if [ $proxyarp_state ]; then  
+  echo "org.onosproject.proxyarp activated"
+fi
+if [ $openflow_state ]; then  
+  echo "org.onosproject.openflow activated"
+fi
