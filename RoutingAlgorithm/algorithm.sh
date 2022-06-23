@@ -81,17 +81,75 @@ if [ $algorithm_instance ]; then
 fi
 
 # 连接redis_instance、algorithm_instance和onos22到网桥algorithm_bridge
-docker network connect algorithm_bridge redis_instance
-docker network connect algorithm_bridge algorithm_instance
-docker network connect algorithm_bridge onos22
+connect_state=$(docker inspect redis_instance|grep algorithm_bridge|awk '{print $1}')
+if [ $connect_state ]; then  
+  echo "redis_instance 已连接网桥 algorithm_bridge"
+  docker network disconnect algorithm_bridge redis_instance > /dev/null
+  docker network connect algorithm_bridge redis_instance > /dev/null
+  echo "redis_instance 重新连接网桥 algorithm_bridge"
+else
+  docker network connect algorithm_bridge redis_instance > /dev/null
+fi
+connect_state=$(docker inspect redis_instance|grep algorithm_bridge|awk '{print $1}')
+if [ $connect_state ]; then  
+  echo "redis_instance 成功连接网桥 algorithm_bridge"
+else
+  echo "redis_instance 连接网桥 algorithm_bridge 失败"
+  exit
+fi
+
+connect_state=$(docker inspect algorithm_instance|grep algorithm_bridge|awk '{print $1}')
+if [ $connect_state ]; then  
+  echo "algorithm_instance 已连接网桥 algorithm_bridge"
+  docker network disconnect algorithm_bridge algorithm_instance > /dev/null
+  docker network connect algorithm_bridge algorithm_instance > /dev/null
+  echo "algorithm_instance 重新连接网桥 algorithm_bridge"
+else
+  docker network connect algorithm_bridge algorithm_instance > /dev/null
+fi
+connect_state=$(docker inspect algorithm_instance|grep algorithm_bridge|awk '{print $1}')
+if [ $connect_state ]; then  
+  echo "algorithm_instance 成功连接网桥 algorithm_bridge"
+else
+  echo "algorithm_instance 连接网桥 algorithm_bridge 失败"
+  exit
+fi
+
+connect_state=$(docker inspect onos22|grep algorithm_bridge|awk '{print $1}')
+if [ $connect_state ]; then  
+  echo "onos22 已连接网桥 algorithm_bridge"
+  docker network disconnect algorithm_bridge onos22 > /dev/null
+  docker network connect algorithm_bridge onos22 > /dev/null
+  echo "onos22 重新连接网桥 algorithm_bridge"
+else
+  docker network connect algorithm_bridge onos22 > /dev/null
+fi
+connect_state=$(docker inspect onos22|grep algorithm_bridge|awk '{print $1}')
+if [ $connect_state ]; then  
+  echo "onos22 成功连接网桥 algorithm_bridge"
+else
+  echo "onos22 连接网桥 algorithm_bridge 失败"
+  exit
+fi
 echo "容器redis_instance algorithm_instance onos22连接网桥algorithm_bridge成功"
 
 # Clean java target
 mvn clean
 
 # 卸载fwd模块,安装onos-apps-smartfwd-oar.oar并启动
-docker exec -i onos22 ./bin/onos-app localhost deactivate org.onosproject.fwd > /dev/null
-echo "org.onosproject.fwd deactivated"
+rm /root/.ssh/known_hosts
+active_apps=$(sshpass -p "rocks" ssh -o StrictHostKeyChecking=no -p 8101 onos@localhost "apps -s -a")
+fwd_state=$(echo $active_apps|xargs -n 1|grep org.onosproject.fwd)
+if [ $fwd_state ]; then  
+  docker exec -i onos22 ./bin/onos-app localhost deactivate org.onosproject.fwd > /dev/null
+  echo "org.onosproject.fwd deactivated"
+fi
 docker cp ../smartfwd/onos-apps-smartfwd-oar.oar onos22:/root/onos/apps
-docker exec -i onos22 ./bin/onos-app localhost install! ./apps/onos-apps-smartfwd-oar.oar > /dev/null
-echo "smartfwd模块安装并启动,请查看是否和algorithm_instance容器建立连接"
+docker exec -i onos22 ./bin/onos-app localhost reinstall! ./apps/onos-apps-smartfwd-oar.oar > /dev/null
+active_apps=$(sshpass -p "rocks" ssh -o StrictHostKeyChecking=no -p 8101 onos@localhost "apps -s -a")
+smartfwd_state=$(echo $active_apps|xargs -n 1|grep org.onosproject.smartfwd)
+if [ $smartfwd_state ]; then  
+  echo "smartfwd模块安装并启动,请查看是否和algorithm_instance容器建立连接"
+else
+  echo "smartfwd模块安装失败!!!"
+fi
