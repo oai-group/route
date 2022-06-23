@@ -14,12 +14,12 @@ else
 fi
 
 # Install sshpass
-# sshpass_version=$(apt show sshpass|grep Version|awk '{print $2}')
-# if [ $sshpass_version ]; then  
-#   echo "sshpass已安装,当前版本为:{$sshpass_version}"
-# else
-#   apt install -y sshpass
-# fi
+sshpass_version=$(apt show sshpass|grep Version|awk '{print $2}')
+if [ $sshpass_version ]; then  
+  echo "sshpass已安装,当前版本为:{$sshpass_version}"
+else
+  apt install -y sshpass
+fi
 
 # Start Redis:存储链路时延、丢包率和路由信息
 redis_instance=$(docker ps -a|grep redis_instance|awk '{print $1}')

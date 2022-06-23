@@ -21,12 +21,12 @@ if [ -z $oar_file ]; then
 fi
 
 # Install sshpass
-# sshpass_version=$(apt show sshpass|grep Version|awk '{print $2}')
-# if [ $sshpass_version ]; then  
-#   echo "sshpass已安装,当前版本为:{$sshpass_version}"
-# else
-#   apt install -y sshpass
-# fi
+sshpass_version=$(apt show sshpass|grep Version|awk '{print $2}')
+if [ $sshpass_version ]; then  
+  echo "sshpass已安装,当前版本为:{$sshpass_version}"
+else
+  apt install -y sshpass
+fi
 
 # Install maven
 maven_version=$(apt show maven|grep Version|awk '{print $2}')
