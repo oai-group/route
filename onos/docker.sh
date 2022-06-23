@@ -4,6 +4,15 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 echo "当前脚本所在路径为: $DIR"
 
+# Check docker
+docker_version=$(apt show docker|grep Version|awk '{print $2}')
+if [ $docker_version ]; then  
+  echo "docker已安装"
+else
+  echo "docker未安装,请手动安装docker"
+  exit
+fi
+
 # Install sshpass
 # sshpass_version=$(apt show sshpass|grep Version|awk '{print $2}')
 # if [ $sshpass_version ]; then  
