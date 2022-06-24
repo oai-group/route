@@ -35,7 +35,14 @@ sshpass_version=$(apt show sshpass|grep Version|awk '{print $2}')
 if [ $sshpass_version ]; then  
   echo "sshpass已安装,当前版本为:{$sshpass_version}"
 else
-  apt install -y sshpass
+  apt install -y sshpass /dev/null
+  sshpass_version=$(apt show sshpass|grep Version|awk '{print $2}')
+  if [ $sshpass_version ]; then  
+    echo "sshpass安装成功,当前版本为:{$sshpass_version}"
+  else
+    echo "sshpass安装失败,请手动安装"
+    exit
+  fi
 fi
 
 # Install maven
@@ -54,24 +61,35 @@ else
 fi
 
 # Docker network create
-algorithm_bridge=$(docker network ls|grep algorithm_bridge|awk '{print $1}')
-if [ -z $algorithm_bridge ]; then  
-  docker network create --driver bridge algorithm_bridge
-  echo "成功创建网桥:algorithm_bridge"
+oai_bridge=$(docker network ls|grep oai_bridge|awk '{print $1}')
+if [ -z $oai_bridge ]; then  
+  docker network create -d bridge -o com.docker.network.bridge.name=oai oai_bridge
+  echo "成功创建网桥: oai_bridge"
 else
-  echo "已存在网桥:algorithm_bridge"
+  echo "已存在网桥: oai_bridge"
 fi
 
 # Package RoutingAlgorithm-1.0-SNAPSHOT.jar
 mvn clean
 mvn package
+route_jar=$(ls ./target|grep ^RoutingAlgorithm-1.0-SNAPSHOT.jar)
+if [ -z $route_jar ]; then  
+  echo "路由算法编译失败,请手动编译生成RoutingAlgorithm-1.0-SNAPSHOT.jar"
+  exit
+fi
 
 # Build docker image and run algorithm_instance
 algorithm_instance=$(docker ps -a|grep algorithm_instance|awk '{print $1}')
-if [ $algorithm_instance ]; then  
+if [ $algorithm_instance ]; then
+  connect_state=$(docker inspect algorithm_instance|grep oai_bridge|head -1|awk '{print $2}')
+  if [ $connect_state ]; then  
+    docker network disconnect oai_bridge algorithm_instance > /dev/null
+    echo "断开 algorithm_instance 与网桥 oai_bridge 的连接"
+  fi
   docker rm -f $algorithm_instance > /dev/null
   echo "删除旧route algorithm容器: $algorithm_instance"
 fi
+
 algorithm_image=$(docker images|grep algorithm|awk '{print $1}')
 if [ $algorithm_image ]; then  
   docker rmi -f $algorithm_image > /dev/null
@@ -84,65 +102,20 @@ if [ $algorithm_image ]; then
   echo "通过Dockerfile构建新的route algorithm镜像: $algorithm_instance"
 fi
 
-docker run -itd --name algorithm_instance -p 1053:1053 algorithm:latest > /dev/null
+docker run -itd --name algorithm_instance --network oai_bridge -p 1053:1053 algorithm:latest > /dev/null
+
 algorithm_instance=$(docker ps -a|grep algorithm_instance|awk '{print $1}')
 if [ $algorithm_instance ]; then  
   echo "创建新的route algorithm容器: $algorithm_instance"
-  sleep 5
+  connect_state=$(docker inspect algorithm_instance|grep oai_bridge|head -1|awk '{print $2}')
+  if [ $connect_state ]; then  
+    echo "algorithm_instance 已连接网桥 oai_bridge"
+  else
+    echo "algorithm_instance 连接网桥 oai_bridge 失败"
+    exit
+  fi
+  sleep 3
 fi
-
-# 连接redis_instance、algorithm_instance和onos22到网桥algorithm_bridge
-connect_state=$(docker inspect redis_instance|grep algorithm_bridge|awk '{print $1}')
-if [ $connect_state ]; then  
-  echo "redis_instance 已连接网桥 algorithm_bridge"
-  docker network disconnect algorithm_bridge redis_instance > /dev/null
-  docker network connect algorithm_bridge redis_instance > /dev/null
-  echo "redis_instance 重新连接网桥 algorithm_bridge"
-else
-  docker network connect algorithm_bridge redis_instance > /dev/null
-fi
-connect_state=$(docker inspect redis_instance|grep algorithm_bridge|awk '{print $1}')
-if [ $connect_state ]; then  
-  echo "redis_instance 成功连接网桥 algorithm_bridge"
-else
-  echo "redis_instance 连接网桥 algorithm_bridge 失败"
-  exit
-fi
-
-connect_state=$(docker inspect algorithm_instance|grep algorithm_bridge|awk '{print $1}')
-if [ $connect_state ]; then  
-  echo "algorithm_instance 已连接网桥 algorithm_bridge"
-  docker network disconnect algorithm_bridge algorithm_instance > /dev/null
-  docker network connect algorithm_bridge algorithm_instance > /dev/null
-  echo "algorithm_instance 重新连接网桥 algorithm_bridge"
-else
-  docker network connect algorithm_bridge algorithm_instance > /dev/null
-fi
-connect_state=$(docker inspect algorithm_instance|grep algorithm_bridge|awk '{print $1}')
-if [ $connect_state ]; then  
-  echo "algorithm_instance 成功连接网桥 algorithm_bridge"
-else
-  echo "algorithm_instance 连接网桥 algorithm_bridge 失败"
-  exit
-fi
-
-connect_state=$(docker inspect onos22|grep algorithm_bridge|awk '{print $1}')
-if [ $connect_state ]; then  
-  echo "onos22 已连接网桥 algorithm_bridge"
-  docker network disconnect algorithm_bridge onos22 > /dev/null
-  docker network connect algorithm_bridge onos22 > /dev/null
-  echo "onos22 重新连接网桥 algorithm_bridge"
-else
-  docker network connect algorithm_bridge onos22 > /dev/null
-fi
-connect_state=$(docker inspect onos22|grep algorithm_bridge|awk '{print $1}')
-if [ $connect_state ]; then  
-  echo "onos22 成功连接网桥 algorithm_bridge"
-else
-  echo "onos22 连接网桥 algorithm_bridge 失败"
-  exit
-fi
-echo "容器redis_instance algorithm_instance onos22连接网桥algorithm_bridge成功"
 
 # Clean java target
 mvn clean
