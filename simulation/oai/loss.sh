@@ -20,8 +20,8 @@ source ./.py38/bin/activate
 source ./python.rc
 
 # Check if namespace if h9 exists
-h9=$(ip netns|grep h9)
-if [-z $h9]; then  
+h9=$(ip netns|grep h9|awk '{print $1}')
+if [ -z $h9 ]; then  
   echo "命名空间h9不存在,请先运行topo.sh和manage.sh生成回传网络和Host"
   exit
 fi
