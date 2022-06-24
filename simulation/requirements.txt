@@ -1,0 +1,14 @@
+networkx
+numpy
+keras
+matplotlib
+loguru
+dpkt
+fnss
+flask
+flask_restful
+netifaces
+requests
+ovs
+scapy
+redis
