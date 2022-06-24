@@ -6,6 +6,21 @@ echo "当前脚本所在路径为: $DIR"
 cd $DIR
 cd ..
 
+# Install ethtool
+ethtool=$(apt show ethtool|grep Version|awk '{print $2}')
+if [ $ethtool ]; then  
+  echo "ethtool已安装,当前版本为:{$ethtool}"
+else
+  apt update && apt install -y ethtool
+  ethtool=$(apt show ethtool|grep Version|awk '{print $2}')
+  if [ $ethtool ]; then  
+    echo "ethtool安装成功,当前版本为:{$ethtool}"
+  else
+    echo "ethtool安装失败,请手动安装"
+    exit
+  fi
+fi
+
 # Check Python3
 python3_version=$(python3 -V|awk '{print $2}')
 if [ $python3_version ]; then  
