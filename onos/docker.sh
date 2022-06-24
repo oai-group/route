@@ -12,6 +12,7 @@ else
   echo "docker未安装,请手动安装docker"
   exit
 fi
+iptables -t filter -N DOCKER
 
 # Install sshpass
 sshpass_version=$(apt show sshpass|grep Version|awk '{print $2}')

@@ -5,6 +5,16 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 echo "当前脚本所在路径为: $DIR"
 cd $DIR
 
+# Check docker
+docker_version=$(apt show docker|grep Version|awk '{print $2}')
+if [ $docker_version ]; then  
+  echo "docker已安装"
+else
+  echo "docker未安装,请手动安装docker"
+  exit
+fi
+iptables -t filter -N DOCKER
+
 # Check if redis_instance and onos22 exist
 redis_instance=$(docker ps|grep redis_instance|awk '{print $1}')
 onos_instance=$(docker ps|grep onos22|awk '{print $1}')
@@ -75,6 +85,7 @@ if [ $algorithm_image ]; then
 fi
 
 docker run -itd --name algorithm_instance -p 1053:1053 algorithm:latest > /dev/null
+algorithm_instance=$(docker ps -a|grep algorithm_instance|awk '{print $1}')
 if [ $algorithm_instance ]; then  
   echo "创建新的route algorithm容器: $algorithm_instance"
   sleep 5
