@@ -3,3 +3,9 @@ RoutingAlgorithm/target
 RoutingAlgorithm/dependency-reduced-pom.xml
 smartfwd/onos.tar
 smartfwd/onos-apps-smartfwd-oar.oar
+.vscode
+simulation/__pycache__
+simulation/--vlan
+simulation/.py38
+simulation/*/__pycache__
+simulation/*/*/__pycache__
