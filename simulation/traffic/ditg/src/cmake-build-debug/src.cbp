@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="src"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/tmp/tmp.rpvDIN3dgg/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/tmp/tmp.rpvDIN3dgg/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -f &quot;/tmp/tmp.rpvDIN3dgg/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/tmp/tmp.rpvDIN3dgg/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/tmp/tmp.rpvDIN3dgg/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/tmp/tmp.rpvDIN3dgg/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/tmp/tmp.rpvDIN3dgg/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/tmp/tmp.rpvDIN3dgg/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/tmp/tmp.rpvDIN3dgg/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/tmp/tmp.rpvDIN3dgg/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="src">
+				<Option output="/tmp/tmp.rpvDIN3dgg/cmake-build-debug/src" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.rpvDIN3dgg/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DUNIX"/>
+					<Add directory="/tmp/tmp.rpvDIN3dgg/common"/>
+					<Add directory="/tmp/tmp.rpvDIN3dgg/ITGLog"/>
+					<Add directory="/tmp/tmp.rpvDIN3dgg/ITGManager"/>
+					<Add directory="/tmp/tmp.rpvDIN3dgg/ITGRecv"/>
+					<Add directory="/tmp/tmp.rpvDIN3dgg/ITGSend"/>
+					<Add directory="/tmp/tmp.rpvDIN3dgg/ITGSend/newran"/>
+					<Add directory="/tmp/tmp.rpvDIN3dgg/libITG"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/tmp/tmp.rpvDIN3dgg/cmake-build-debug/Makefile&quot;  VERBOSE=1 src"/>
+					<CompileFile command="/usr/bin/make -f &quot;/tmp/tmp.rpvDIN3dgg/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/tmp/tmp.rpvDIN3dgg/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/tmp/tmp.rpvDIN3dgg/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="src/fast">
+				<Option output="/tmp/tmp.rpvDIN3dgg/cmake-build-debug/src" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.rpvDIN3dgg/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DUNIX"/>
+					<Add directory="/tmp/tmp.rpvDIN3dgg/common"/>
+					<Add directory="/tmp/tmp.rpvDIN3dgg/ITGLog"/>
+					<Add directory="/tmp/tmp.rpvDIN3dgg/ITGManager"/>
+					<Add directory="/tmp/tmp.rpvDIN3dgg/ITGRecv"/>
+					<Add directory="/tmp/tmp.rpvDIN3dgg/ITGSend"/>
+					<Add directory="/tmp/tmp.rpvDIN3dgg/ITGSend/newran"/>
+					<Add directory="/tmp/tmp.rpvDIN3dgg/libITG"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/tmp/tmp.rpvDIN3dgg/cmake-build-debug/Makefile&quot;  VERBOSE=1 src/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/tmp/tmp.rpvDIN3dgg/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/tmp/tmp.rpvDIN3dgg/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/tmp/tmp.rpvDIN3dgg/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/tmp/tmp.rpvDIN3dgg/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/tmp/tmp.rpvDIN3dgg/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/tmp/tmp.rpvDIN3dgg/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/tmp/tmp.rpvDIN3dgg/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/tmp/tmp.rpvDIN3dgg/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGDec/ITGDecod.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGLog/ITGLog.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGLog/ITGLog.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGLog/channel.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGLog/channel.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGManager/DummyManager.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGManager/DummyManager.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGManager/ITGManager.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGManager/common.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGManager/common.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGManager/stats.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGManager/stats.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGRecv/ITGRecv.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGRecv/ITGRecv.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGRecv/data.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGRecv/data.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/ITGSend.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/ITGSend.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/array.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/extreal.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/extreal.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/format.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/format.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/geturng.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/include.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/myexcept.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/myexcept.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/newran.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/newran1.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/newran2.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/nr_ex.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/simpstr.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/simpstr.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/str.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/str.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/test_lg.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/test_out.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/test_out.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/tryrand.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/tryrand.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/tryrand1.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/tryrand2.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/tryrand3.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/tryrand4.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/tryrand5.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/tryrand6.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/tryurng.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/tryurng.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/tryurng1.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/utility.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/newran/utility.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/traffic.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/ITGSend/traffic.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/common/ITG.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/common/ITG.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/common/crypto.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/common/crypto.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/common/debug.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/common/pipes.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/common/pipes.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/common/serial.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/common/serial.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/common/thread.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/common/thread.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/common/timestamp.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/common/timestamp.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/libITG/ITGapi.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/libITG/ITGapi.h">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.rpvDIN3dgg/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
