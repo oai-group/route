@@ -37,7 +37,7 @@ vlan_to_link = {}
 # todo store stats in redis
 class Sniffer:
 	def __init__(self, count: int, intf: str, filter: str, link_to_vlan_fn: str,
-	             rip: str = "127.0.0.1", rport: int = 6379) -> None:
+	             rip: str = "192.168.1.106", rport: int = 6379) -> None:
 		self.pkt_count = count
 		self.intf = intf
 		self.filter = filter
