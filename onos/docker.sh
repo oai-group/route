@@ -19,7 +19,14 @@ sshpass_version=$(apt show sshpass|grep Version|awk '{print $2}')
 if [ $sshpass_version ]; then  
   echo "sshpass已安装,当前版本为:{$sshpass_version}"
 else
-  apt install -y sshpass
+  apt update && apt install -y sshpass
+  sshpass_version=$(apt show sshpass|grep Version|awk '{print $2}')
+  if [ $sshpass_version ]; then  
+    echo "sshpass安装成功,当前版本为:{$sshpass_version}"
+  else
+    echo "sshpass安装失败,请手动安装"
+    exit
+  fi
 fi
 
 # Docker network create

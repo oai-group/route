@@ -35,7 +35,7 @@ sshpass_version=$(apt show sshpass|grep Version|awk '{print $2}')
 if [ $sshpass_version ]; then  
   echo "sshpass已安装,当前版本为:{$sshpass_version}"
 else
-  apt install -y sshpass /dev/null
+  apt update && apt install -y sshpass /dev/null
   sshpass_version=$(apt show sshpass|grep Version|awk '{print $2}')
   if [ $sshpass_version ]; then  
     echo "sshpass安装成功,当前版本为:{$sshpass_version}"
