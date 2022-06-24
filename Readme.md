@@ -32,9 +32,9 @@
 
   - 98-100 :  "enable_delay_constraint": 0,
 
-     				"enable_rate_constraint": 1,
+     				  "enable_rate_constraint": 1,
 	
-     				"enable_loss_constraint": 0,
+     				  "enable_loss_constraint": 0,
 
 > 43 :  nat网桥出口网卡,设置为实际可以上网的物理网卡（不设置也行,只是为了namespace能访问网络）
 >
@@ -58,19 +58,19 @@
 >
 > 870-877 :   attach_interface_to_sw("s0", "enp24s0f0")
 >
-> ​    			    os.system("ifconfig enp24s0f0 up")
+> ​    			   os.system("ifconfig enp24s0f0 up")
 >
-> ​					attach_interface_to_sw("s4", "enp24s0f1")
+> ​					   attach_interface_to_sw("s4", "enp24s0f1")
 >
-> ​					os.system("ifconfig enp24s0f1 up")
+> ​					   os.system("ifconfig enp24s0f1 up")
 >
-> ​					attach_interface_to_sw("s11", "enp24s0f2")
+> ​					   attach_interface_to_sw("s11", "enp24s0f2")
 >
-> ​					os.system("ifconfig enp24s0f2 up")
+> ​					   os.system("ifconfig enp24s0f2 up")
 >
-> ​    				attach_interface_to_sw("s18", "enp24s0f3")
+> ​    				 attach_interface_to_sw("s18", "enp24s0f3")
 >
-> ​    				os.system("ifconfig enp24s0f3 up")
+> ​    				 os.system("ifconfig enp24s0f3 up")
 >
 > 将enp24s0f0挂载到ovs bridge s0上
 >
@@ -78,11 +78,11 @@
 >
 > 599-604 :  rate, delay, loss, _ = [50, 10, 10, 0]
 >
-> ​				  rate = rate if int(self.config["enable_rate_constraint"]) == 1 else None
+> ​				    rate = rate if int(self.config["enable_rate_constraint"]) == 1 else None
 >
-> ​         		 delay = delay if int(self.config["enable_delay_constraint"]) == 1 else None
+> ​         	delay = delay if int(self.config["enable_delay_constraint"]) == 1 else None
 >
-> ​           	   loss = loss if int(self.config["enable_loss_constraint"]) == 1 else None
+> ​           loss = loss if int(self.config["enable_loss_constraint"]) == 1 else None
 >
 > rate, delay, loss, _ = [50, 10, 10, 0] :  表示设置带宽为50Mbps,时延为10ms,单向丢包率为10%;注意需要配合enable_rate_constraint，enable_delay_constraint，enable_loss_constraint控制是否设置
 >
