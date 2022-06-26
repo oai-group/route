@@ -3,27 +3,31 @@
 # Clear all
 for bridge in `ovs-vsctl list-br`; 
 do
-                ovs-vsctl del-br $bridge
-                echo "$bridge" deleted
+  ovs-vsctl del-br $bridge
+  echo "$bridge" deleted
 done
 
-for hid in {0..24}
+for hid in {0..18}
 do
+  if [ $(ip netns|awk '{print $1}'|grep h${hid}$) ]; then
     ip netns del "h${hid}"
+    echo "h${hid}" deleted
+  fi
 done
-
-ip netns del test
-
 
 for name in $(ifconfig -a | sed 's/[ \t].*//;/^\(lo\|\)$/d' | grep "-")
 do
-    echo $name
-    ip link del dev ${name}
+  echo "$name" deleted
+  ip link del dev ${name} 2>/dev/null 
 done
 
+if [ $(ifconfig | grep nat1 | awk '{print $1}') ]; then
+  ip link del dev nat1
+fi
 
-ip link del dev nat1
-ip link del dev nat2
+if [ $(ifconfig|grep nat2|awk '{print $1}') ]; then
+  ip link del dev nat2
+fi
 
 iptables -P INPUT ACCEPT
 iptables -P FORWARD ACCEPT
