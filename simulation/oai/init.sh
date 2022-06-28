@@ -47,5 +47,4 @@ fi
 
 # .py38 install requirements
 source ./.py38/bin/activate
-pwd
 pip install -r ./requirements.txt
