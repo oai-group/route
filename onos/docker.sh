@@ -32,7 +32,7 @@ fi
 # Docker network create
 oai_bridge=$(docker network ls|grep oai_bridge|awk '{print $1}')
 if [ -z $oai_bridge ]; then  
-  docker network create -d bridge -o com.docker.network.bridge.name=oai oai_bridge
+  docker network create -d bridge -o com.docker.network.bridge.name=oai --subnet 172.19.0.0/24 oai_bridge
   echo "成功创建网桥: oai_bridge"
 else
   echo "已存在网桥: oai_bridge"
