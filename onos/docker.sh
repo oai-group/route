@@ -5,7 +5,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 echo "当前脚本所在路径为: $DIR"
 
 # Check docker
-docker_version=$(apt show docker|grep Version|awk '{print $2}')
+docker_version=$(dpkg --status docker 2>/dev/null|grep Version|awk '{print $2}')
 if [ $docker_version ]; then  
   echo "docker已安装"
 else
@@ -15,12 +15,12 @@ fi
 iptables -t filter -N DOCKER
 
 # Install sshpass
-sshpass_version=$(apt show sshpass|grep Version|awk '{print $2}')
+sshpass_version=$(dpkg --status sshpass 2>/dev/null|grep Version|awk '{print $2}')
 if [ $sshpass_version ]; then  
   echo "sshpass已安装,当前版本为:{$sshpass_version}"
 else
   apt update && apt install -y sshpass
-  sshpass_version=$(apt show sshpass|grep Version|awk '{print $2}')
+  sshpass_version=$(dpkg --status sshpass 2>/dev/null|grep Version|awk '{print $2}')
   if [ $sshpass_version ]; then  
     echo "sshpass安装成功,当前版本为:{$sshpass_version}"
   else

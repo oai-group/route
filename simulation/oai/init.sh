@@ -7,12 +7,12 @@ cd $DIR
 cd ..
 
 # Install ethtool
-ethtool=$(apt show ethtool|grep Version|awk '{print $2}')
+ethtool=$(dpkg --status ethtool 2>/dev/null|grep Version|awk '{print $2}')
 if [ $ethtool ]; then  
   echo "ethtool已安装,当前版本为:{$ethtool}"
 else
   apt update && apt install -y ethtool
-  ethtool=$(apt show ethtool|grep Version|awk '{print $2}')
+  ethtool=$(dpkg --status ethtool 2>/dev/null|grep Version|awk '{print $2}')
   if [ $ethtool ]; then  
     echo "ethtool安装成功,当前版本为:{$ethtool}"
   else
@@ -30,7 +30,7 @@ else
 fi
 
 # Check Python3-venv
-python3venv_version=$(apt show python3-venv|grep Version|awk '{print $2}')
+python3venv_version=$(dpkg --status python3-venv 2>/dev/null|grep Version|awk '{print $2}')
 if [ $python3venv_version ]; then  
   echo "python3-venv已安装,当前版本为:{$python3venv_version}"
 else

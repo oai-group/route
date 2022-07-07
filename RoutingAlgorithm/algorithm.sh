@@ -6,7 +6,7 @@ echo "当前脚本所在路径为: $DIR"
 cd $DIR
 
 # Check docker
-docker_version=$(apt show docker|grep Version|awk '{print $2}')
+docker_version=$(dpkg --status docker 2>/dev/null|grep Version|awk '{print $2}')
 if [ $docker_version ]; then  
   echo "docker已安装"
 else
@@ -31,12 +31,12 @@ if [ -z $oar_file ]; then
 fi
 
 # Install sshpass
-sshpass_version=$(apt show sshpass|grep Version|awk '{print $2}')
+sshpass_version=$(dpkg --status sshpass 2>/dev/null|grep Version|awk '{print $2}')
 if [ $sshpass_version ]; then  
   echo "sshpass已安装,当前版本为:{$sshpass_version}"
 else
   apt update && apt install -y sshpass /dev/null
-  sshpass_version=$(apt show sshpass|grep Version|awk '{print $2}')
+  sshpass_version=$(dpkg --status sshpass 2>/dev/null|grep Version|awk '{print $2}')
   if [ $sshpass_version ]; then  
     echo "sshpass安装成功,当前版本为:{$sshpass_version}"
   else
@@ -46,12 +46,12 @@ else
 fi
 
 # Install maven
-maven_version=$(apt show maven|grep Version|awk '{print $2}')
+maven_version=$(dpkg --status maven 2>/dev/null|grep Version|awk '{print $2}')
 if [ $maven_version ]; then  
   echo "maven已安装,当前版本为:{$maven_version}"
 else
   apt install -y maven > /dev/null
-  maven_version=$(apt show maven|grep Version|awk '{print $2}')
+  maven_version=$(dpkg --status maven 2>/dev/null|grep Version|awk '{print $2}')
   if [ $maven_version ]; then  
     echo "maven安装成功,当前版本为:{$maven_version}"
   else
