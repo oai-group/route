@@ -81,7 +81,7 @@ mkdir /tmp/data
 cp $DIR/telemetry.flow.json /tmp/data
 echo "拷贝telemetry.flow.json"
 
-docker run -itd --network oai_bridge -p 8181:8181 -p 8101:8101 -p 6666:6653 -p 1050:1050 -p 1051:1051 -p 5005:5005 -p 830:830 -p 7896:7896 -p 1054:1054 -p 1060:1060 -v /tmp/data:/data --name onos22 onosproject/onos > /dev/null
+docker run -itd --network oai_bridge -p 8181:8181 -p 8101:8101 -p 6666:6653 -p 1050:1050 -p 1051:1051 -p 5005:5005 -p 830:830 -p 7896:7896 -p 1054:1054 -p 1060:1060 -v /tmp/data:/data --name onos22 onosproject/onos:2.7-latest > /dev/null
 
 onos_instance=$(docker ps -a|grep onos22|awk '{print $1}')
 if [ $onos_instance ]; then  
