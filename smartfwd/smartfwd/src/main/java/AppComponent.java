@@ -292,17 +292,17 @@ public class AppComponent {
                             back[cntb--] = curr;
                         }
                         if(start == 0) {
-                            installOnePath(to, "192.168.2.101/32");
-                            installOneBackPath(back, "192.168.2.101/32");
+                            installOnePath(to, "192.168.2.2/32");
+                            installOneBackPath(back, "192.168.2.2/32");
                         }
-                        if(start == 4) {
-                            installOnePath(to, "192.168.2.103/32");
-                            installOneBackPath(back, "192.168.2.103/32");
-                        }
-                        if(start == 11) {
-                            installOnePath(to, "192.168.2.104/32");
-                            installOneBackPath(back, "192.168.2.104/32");
-                        }
+                        // if(start == 4) {
+                        //     installOnePath(to, "192.168.2.103/32");
+                        //     installOneBackPath(back, "192.168.2.103/32");
+                        // }
+                        // if(start == 11) {
+                        //     installOnePath(to, "192.168.2.104/32");
+                        //     installOneBackPath(back, "192.168.2.104/32");
+                        // }
                         logger.info("%%%%%%%%%%%%%%%%%%" + Arrays.toString(to));
                     }
 
@@ -350,7 +350,7 @@ public class AppComponent {
 //            writeToFile("after", rateFilePath);
 //            rateToFile(portRate, rateFilePath);
             try {
-                Thread.sleep(120000);
+                Thread.sleep(130000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -513,14 +513,14 @@ public class AppComponent {
         logger.info("Init static flow table");
         init();
         //配置默认的一条路由
-        installOnePath(new int[]{0,0,1,2,7,6,11,10,15,16,18,18}, "192.168.2.101/32");
-        installOneBackPath(new int[]{18,18,16,15,10,11,6,7,2,1,0,0}, "192.168.2.101/32");
+        installOnePath(new int[]{0,0,1,2,7,6,11,10,15,16,18,18}, "192.168.2.2/32");
+        installOneBackPath(new int[]{18,18,16,15,10,11,6,7,2,1,0,0}, "192.168.2.2/32");
 
-        installOnePath(new int[]{4,4,3,6,11,10,15,16,18,18}, "192.168.2.103/32");
-        installOneBackPath(new int[]{18,18,16,15,10,11,6,3,4,4}, "192.168.2.103/32");
+        // installOnePath(new int[]{4,4,3,6,11,10,15,16,18,18}, "192.168.2.103/32");
+        // installOneBackPath(new int[]{18,18,16,15,10,11,6,3,4,4}, "192.168.2.103/32");
 
-        installOnePath(new int[]{11,11,10,15,16,18,18}, "192.168.2.104/32");
-        installOneBackPath(new int[]{18,18,16,15,10,11,11}, "192.168.2.104/32");
+        // installOnePath(new int[]{11,11,10,15,16,18,18}, "192.168.2.104/32");
+        // installOneBackPath(new int[]{18,18,16,15,10,11,11}, "192.168.2.104/32");
 
         //start flow entry install worker
         logger.info("Start Flow entry installation worker");
@@ -1227,17 +1227,20 @@ public class AppComponent {
 //        this.optRoutingReqGenerator = optRoutingReqGenerator;
 //        this.optRoutingRespHandler = optRoutingRespHandler;
             this.worker = () -> {
+                logger.info("---------enter worker----------------");
                 ArrayList<Double> res = new ArrayList<>();
                 Map<SwitchPair, Long> map = this.portRate.get();
                 if(null == map) {
+                    logger.info("---------empty map----------------");
                     return;
                 }
+                logger.info("---------get map----------------");
                 for(long rate : map.values()) {
                     res.add(rate * 8/ 1000000.0);
                 }
                 int cntBits = 0;
                 for(Double rate : res) {
-                    if(rate > 48.0) {
+                    if(rate > 40.0) {
                         cntBits++;
                     }
                 }

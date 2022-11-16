@@ -150,6 +150,8 @@ public class MainFunction implements Algorithm {
                         int type = 0;  // 1是静态，2是优化
                         String l = "";
                         List<List<List<Path>>> resRouting = new ArrayList<List<List<Path>>>();
+                        long startTime = 0;
+                        long endTime   = 0;
                         if (map.get("volumes") != null) {
                             System.out.println("请求优化路由");
                             type = 1;
@@ -168,7 +170,9 @@ public class MainFunction implements Algorithm {
                             List<Double> flowMatrix3 = doubles.subList(doubles.size() * 2 / 3, doubles.size());
 
                             //计算优化路由
+                            startTime = System.currentTimeMillis();
                             List<List<Path>> tmp = getOptimizationRouting(1, idx, flowMatrix1);
+                            endTime   = System.currentTimeMillis();
                             resRouting.add(tmp);
                             resRouting.add(tmp);
                             resRouting.add(tmp);
@@ -185,7 +189,7 @@ public class MainFunction implements Algorithm {
                         sendMassage(resRouting, channel);              //send routing
                         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         System.out.println(df.format(new Date()) + "---------------------------------------");
-
+                        System.out.println("管控时延 : " + (endTime - startTime) + " ms");
                     }
                 }
 
@@ -229,7 +233,7 @@ public class MainFunction implements Algorithm {
         List<List<Path>> newRoutingList = new ArrayList<>();
         newRoutingList = ls.getNewRoutingList();//获得路由表
         // 更新ls中的当前路由表
-        ls.changeCurRouting(newRoutingList);
+        // ls.changeCurRouting(newRoutingList);
         //更新main当前路由表
 //        CurRouting.set(flowType,newRoutingList);
 

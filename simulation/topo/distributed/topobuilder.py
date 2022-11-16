@@ -598,10 +598,10 @@ class TopoBuilder:
 					# rate, delay, loss, _ = new_topo[sa_id][sb_id]
 					rate, delay, loss, _ = [50, 10, 10, 0]
 					rate = rate if int(self.config["enable_rate_constraint"]) == 1 else None
-					delay = delay if int(
-						self.config["enable_delay_constraint"]) == 1 else None
+					delay = delay if int(self.config["enable_delay_constraint"]) == 1 else None
 					loss = loss if int(self.config["enable_loss_constraint"]) == 1 else None
-					# loss = loss if (sa_id == 0 and sb_id == 1) else None
+					# loss = 5 if (sa_id == 7 and sb_id == 8) else None
+					# delay = 5 if (sa_id == 8 and sb_id == 9) else None
 					new_links.add(link)
 					new_links.add(reverse_link)
 					if link not in self.local_links:
@@ -867,14 +867,14 @@ class TopoBuilder:
 		os.system("iptables -A FORWARD -o {} -i {} -j ACCEPT".format(intf, "nat2"))
 		os.system("iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o {} -j MASQUERADE".format(intf))
 
-		# attach_interface_to_sw("s0", "enp24s0f0")
-		# os.system("ifconfig enp24s0f0 up")
+		attach_interface_to_sw("s0", "enp1s0f0")
+		os.system("ifconfig enp1s0f0 up")
 		# attach_interface_to_sw("s4", "enp24s0f1")
 		# os.system("ifconfig enp24s0f1 up")
 		# attach_interface_to_sw("s11", "enp24s0f2")
 		# os.system("ifconfig enp24s0f2 up")
-		# attach_interface_to_sw("s18", "enp24s0f3")
-		# os.system("ifconfig enp24s0f3 up")
+		attach_interface_to_sw("s18", "enp1s0f1")
+		os.system("ifconfig enp1s0f1 up")
 
 		# set add link to host
 		# todo remove id from config file,
